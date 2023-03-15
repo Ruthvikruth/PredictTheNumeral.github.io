@@ -101,6 +101,9 @@
                 delete numbers[prev];
                 delete questions[prev];
                 delete hint1[prev];
+                numbers = numbers.filter(filtering);
+                questions = questions.filter(filtering);
+                hint1 = hint1.filter(filtering);
             }
             if(count == 5)
             {
@@ -168,6 +171,11 @@
                 x.innerHTML = "<span>Wrong Answer :(</span>";
             }
             temp_scores = temp_scores.concat(temp_score);
+        }
+
+        function filtering(x)
+        {
+            return x != undefined;
         }
 
     </script>
