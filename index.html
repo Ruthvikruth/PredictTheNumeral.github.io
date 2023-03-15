@@ -109,8 +109,8 @@
             {
                 let x = document.getElementById("question");
                 let test = document.getElementById("submitclick");
-                x.innerHTML = "Thank You For Playing!!<br><br>Here's your total score!<br><br><span id='score'>"+score+"</span>";
-                x.innerHTML = x.innerHTML + "<br><br><span>Scores for Individual Questions:</span>";
+                x.innerHTML = "<br><br>Thank You For Playing!!<br><br>Here's your total score!<br><br><span id='score'>"+score+"</span>";
+                x.innerHTML = x.innerHTML + "<br><br><span>Scores Summary:</span>";
                 for(let i = 0 ; i < 5 ; i++)
                 {
                     if(temp_scores[i] == undefined)
