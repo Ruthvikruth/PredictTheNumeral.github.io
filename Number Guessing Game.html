@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict The Numeral</title>
+    <style>
+        body
+        {
+            background-image: url("C:/Users/Hp/Downloads/Predict The Number Bg.png");
+            color: #EEE;
+            font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 24px;
+        }
+
+        h1
+        {
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            color: #000b18;
+            background-color: #EEE;
+            font-size: 32px;
+        }
+
+        button, #submitclick
+        {
+            color: #111;
+            margin-left: 43%;
+            background-color: #FFF;
+            font-size: 30px;
+            width: 180px;
+            border-radius: 8px;
+            transition: all 0.2s ease-in;
+        }
+
+        button:hover, #submitclick:hover
+        {
+            background-color: #C9AF07;
+            color: #FFF;
+            transition: all 0.2s ease-in;
+        }
+
+        .Body
+        {
+            margin-left: 2%;
+        }
+
+        #answer
+        {
+            border-radius: 10px;
+            height: 40px;
+            font-size: 30px;
+            width: 80px;
+            margin-left: 1%;
+        }
+
+        #question
+        {
+            transition: all 1.2s ease-in;
+        }
+
+        #hint
+        {
+            border-radius: 10px;
+            height: 40px;
+            font-size: 30px;
+            width: 180px;
+            margin-left: 43%;
+        }
+
+        #HintsDisplay
+        {
+            color: red;
+        }
+
+        #score
+        {
+            font-size: 62px;
+        }
+
+        #transparentbg
+        {
+            background-color: rgba(11,11,11,0.7);
+            border-radius: 10px;
+        }
+    </style>
+    <script>
+        var numbers = [1,2,3,4,5,6,7,8,9,10];
+        let count = 0,prev;
+        let hints = 0,score=0,temp_scores = [];
+        let temp;
+        let questions = ["Everyone wants me","Atomic number of Helium","Number of primary colors","I have the same number of letters as my name","Panchatantra","August used to be this month number in ancient Roman calender","Number of members in BTS band","My atomic number's chemical element means a lot to you as a human","Standard start time for a work day","I am a combination of True and False"];
+        let hint1 = ["I am unique","The first prime number","A triad","The first positive composite number","Olympic Rings","Highest number on a dice","VIBGYOR","I am a flipped infinity","Actual number of planets in solar system","Last number card in cards"];
+
+        function random_generator()
+        {
+            hints = 0;
+            temp_score = 10;
+            if(count > 0)
+            {
+                delete numbers[prev];
+            }
+            if(count == 5)
+            {
+                let x = document.getElementById("question");
+                let test = document.getElementById("submitclick");
+                x.innerHTML = "Thank You For Playing!!<br><br>Here's your total score!<br><br><span id='score'>"+score+"</span>";
+                x.innerHTML = x.innerHTML + "<br><br><span>Scores for Individual Questions:</span>";
+                for(let i = 0 ; i < 5 ; i++)
+                {
+                    if(temp_scores[i] == undefined)
+                        temp_scores[i] = 0;
+                    x.innerHTML = x.innerHTML + "<br><br><span>Question "+ (i + 1) + " = " + temp_scores[i] +"</span>";
+                }
+                test.value = "Restart";
+                count++;
+            }
+            else if(count == 6)
+            {
+                window.location.reload();
+            }
+            else
+            {
+                let x = document.getElementById("question");
+                let test = document.getElementById("submitclick");
+                let demon = document.getElementById("demon");
+                demon.innerHTML = "";
+                test.value = "Next";
+                temp = Math.floor(Math.random() * numbers.length);
+                x.innerHTML = "<br>Question: " + questions[temp];
+                x.innerHTML = x.innerHTML + "<br><br>Enter your answer here: <input type='number' id='answer'>" + "<br><br><span id='HintsDisplay'></span>" + "<br><br><button id='hint' onclick='generate_hints()'>Get a Hint</button>" + "<br><br><button id='hint' onclick='checker()'>Submit</button>";
+                count++;
+            }
+            prev = temp;
+        }
+
+        function generate_hints()
+        {
+            let hint_ques = document.getElementById("HintsDisplay");
+            if(hints == 0)
+            {
+                hint_ques.innerHTML = "Hint: "+hint1[temp];
+                temp_score = 5;
+                hints++;
+            }
+            else if(hints == 1)
+            {
+                hint_ques.innerHTML = "Answer is "+(temp + 1);
+                hints++;
+                temp_score = 0;
+            }
+        }
+
+        function checker()
+        {
+            let ans = document.getElementById('answer').value;
+            if(Number(ans) == numbers[temp])
+            {
+                let x = document.getElementById('HintsDisplay');
+                x.innerHTML = "<span style='color: green'>Right Answer ^_^</span>";
+                score += temp_score;
+            }
+            else
+            {
+                let x = document.getElementById('HintsDisplay');
+                x.innerHTML = "<span>Wrong Answer :(</span>";
+            }
+            temp_scores = temp_scores.concat(temp_score);
+        }
+
+    </script>
+</head>
+<body>
+    <br>
+    <h1>Predict The Numeral</h1>
+    <section id="transparentbg">
+        <p id="demon" style="font-size: 36px;"><br>&ensp;&nbsp;Rules of the game:</p>
+        <section class="Body">
+                <p id="question">
+                        1. You are given a question and you have to identify the number.
+                        <br>
+                        <br>
+                        2. If you identify the number with just the question, you'll get 10 points.</li>
+                        <br>
+                        <br>
+                        3. You can use hints, if you can't figure out the answer.</li>
+                        <br>
+                        <br>
+                        4. You can use one hints in total. If you use one hint, you can get a maximum of 5 points.</li>
+                        <br>
+                        <br>
+                        5. After you've used your hint and you still can't figure out the number, then you can reveal the number by clicking on "Get a Hint" button but you'll get 0 points.</li>
+                        <br>
+                        <br>
+                        6. Please do ensure to click on submit before proceeding to the next question.
+                        <br>
+                        <br>
+                        7. Else you'll get 0 points for the question.
+                </p>
+            <input type="button" class = "submit" id = "submitclick" value = "Start" onclick = "random_generator()">
+            <br>
+            <br>
+        </section>
+    </section>
+</body>
+</html>
