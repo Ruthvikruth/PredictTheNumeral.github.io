@@ -7,7 +7,7 @@
     <style>
         body
         {
-            background-image: url("https://lh4.googleusercontent.com/FEdRaa0vy9ofRK9N-sRKP9GMd4LF8UVjTI8KXyb0bOsSb3WJQYV9pOilfHiJrhR5HNE=w2400");
+            background-image: url("C:/Users/Hp/Downloads/Predict The Number Bg.png");
             color: #EEE;
             font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             font-size: 24px;
@@ -109,8 +109,8 @@
             {
                 let x = document.getElementById("question");
                 let test = document.getElementById("submitclick");
-                x.innerHTML = "<br>Thank You For Playing!!<br><br>Here's your total score!<br><br><span id='score'>"+score+"</span>";
-                x.innerHTML = x.innerHTML + "<br><br><span>Scores Summary:</span>";
+                x.innerHTML = "Thank You For Playing!!<br><br>Here's your total score!<br><br><span id='score'>"+score+"</span>";
+                x.innerHTML = x.innerHTML + "<br><br><span>Scores for Individual Questions:</span>";
                 for(let i = 0 ; i < 5 ; i++)
                 {
                     if(temp_scores[i] == undefined)
@@ -150,7 +150,7 @@
             }
             else if(hints == 1)
             {
-                hint_ques.innerHTML = "Answer is "+(temp + 1);
+                hint_ques.innerHTML = "Answer is "+ numbers[temp];
                 hints++;
                 temp_score = 0;
             }
